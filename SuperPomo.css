@@ -1,0 +1,37 @@
+body{
+    background: rgba(63, 127, 191, 0.9);
+    margin: 0;
+}
+
+#container{
+    background: rgba(38, 76, 114, 0.9);
+	position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 80%;
+    height: 80%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#timer{
+    font-size: 5em;
+    color: white;
+}
+
+#buttons{
+    margin: 20px auto;
+}
+
+button{
+    background: steelblue;
+    font-size: 2em;
+    padding: 5px;
+    border-style: none;
+}
