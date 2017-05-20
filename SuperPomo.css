@@ -1,3 +1,11 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+  /*credit: https://www.paulirish.com/2012/box-sizing-border-box-ftw/*/
+}
+
 body{
     background: rgba(63, 127, 191, 0.9);
     margin: 0;
@@ -14,15 +22,45 @@ body{
     width: 80%;
     height: 80%;
     border-radius: 5px;
+    min-height: 600px;
+    min-width: 550px;
+    
+}
+
+#titleSection{
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: white;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px auto;
+    margin-top: 5%;
+    width: 30%;
+    text-align: center;
+    min-width: 500px;
+}
+
+#mainSection{
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 60%;
+}
+
+#inspirationalMessage{
+    font-size: 3em;
+    color: white;
+    margin: 0;
 }
 
 #timer{
     font-size: 5em;
     color: white;
+    font-family: 'Assistant', sans-serif;
+    margin: 20px auto;
 }
 
 #buttons{
@@ -30,8 +68,35 @@ body{
 }
 
 button{
+    outline: none;
+    border-color: rgba(38, 76, 114, 0.9);
     background: steelblue;
     font-size: 2em;
     padding: 5px;
-    border-style: none;
+    border-style: solid;
+    border-radius: 5px; 
+    transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+}
+
+button:hover{
+    border-color: steelblue;
+}
+
+button:active{
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 5px 0 rgba(0, 0, 0, 0.19);
+}
+
+.start{
+background: rgb(63, 191, 63);
+}
+
+.stop{
+background: rgb(191, 63, 63);
+}
+
+.bigger{
+    padding: 20px;
+    font-size: 4em;
 }

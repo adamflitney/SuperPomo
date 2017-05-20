@@ -9,17 +9,26 @@
         <title>Super Pomo</title>
         <meta name="description" content="Super Pomo! A simple pomodoro timer for simple people.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Assistant" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="SuperPomo.css"/>
         
     </head> 
     <body>
         <div id="container">
-            <div id="timer">
-                24:59
+            <div id="titleSection">
+                <h1 id="title">Super Pomo!</h1>
+                <h3 id="description">A simple Pomodoro Timer</h3>
             </div>
-            <div id="buttons">
-                <button id="toggleTimer">Start Timer</button>
-                <button id="resetTimer">Reset</button>
+            <div id="mainSection">
+                <h1 id="inspirationalMessage">Let's do some work!</h1>
+                <div id="timer">
+                    <span id="minutes">25</span>:<span id="seconds">00</span>
+                </div>
+                <div id="buttons">
+                    <button id="toggleWorkTimer" class="start">Start Timer</button>
+                    <button id="toggleBreakTimer" >Start Break</button>
+                    <button id="resetTimer" class="stop">Reset</button>
+                </div>
             </div>
         </div>
 
