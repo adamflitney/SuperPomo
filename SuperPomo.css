@@ -9,6 +9,7 @@ html {
 body{
     background: rgba(63, 127, 191, 0.9);
     margin: 0;
+    font-family: 'Lato', sans-serif;
 }
 
 #container{
