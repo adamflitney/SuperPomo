@@ -11,8 +11,8 @@ var workTimerPaused = true;
 var breakTimerPaused = true;
 
 //sound effects
-var breakSound = new Audio("lalala.mp3");
-var workSound = new Audio("shouganai.mp3");
+var breakSound = new Video("lalala.mp3");
+var workSound = new Video("shouganai.mp3");
 
 var x = setInterval(countdown, 1000);
 
