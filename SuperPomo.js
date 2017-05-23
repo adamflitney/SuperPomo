@@ -11,8 +11,8 @@ var workTimerPaused = true;
 var breakTimerPaused = true;
 
 //sound effects
-var breakSound = new Audio("lalala.mp3");
-var workSound = new Audio("shouganai.mp3");
+var breakSound = new Howl({ src: ["lalala.mp3"] });
+var workSound = new Howl({ src: ["shouganai.mp3"] });
 
 var x = setInterval(countdown, 1000);
 
@@ -43,13 +43,7 @@ function displayTime(minutes, seconds) {
 
 //timerPaused = false;
 
-function initSounds() {
-  breakSound.play();
-  workSound.play();
-}
-
 toggleWorkTimerButton.addEventListener("click", function() {
-  initSounds();
   if (workTimerPaused) {
     stopBreakTimer();
     startWorkTimer();
@@ -59,7 +53,6 @@ toggleWorkTimerButton.addEventListener("click", function() {
 });
 
 toggleBreakTimerButton.addEventListener("click", function() {
-  initSounds();
   if (breakTimerPaused) {
     stopWorkTimer();
     startBreakTimer();
@@ -69,7 +62,6 @@ toggleBreakTimerButton.addEventListener("click", function() {
 });
 
 resetButton.addEventListener("click", function() {
-  initSounds();
   toggleWorkTimerButton.classList.remove("bigger");
   toggleBreakTimerButton.classList.remove("bigger");
   stopWorkTimer();
