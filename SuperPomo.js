@@ -117,11 +117,47 @@ function timerFinished() {
     workTimerPaused = true;
     toggleBreakTimerButton.classList.add("bigger");
     message.textContent = "Take a break!";
+    Notify("SuperPomo", "Time for a break!");
     breakSound.play();
   } else if (!breakTimerPaused) {
     breakTimerPaused = true;
     toggleWorkTimerButton.classList.add("bigger");
     message.textContent = "Back to work!";
+    Notify("SuperPomo", "Time to get back to work!");
     workSound.play();
   }
+}
+
+/**
+ * Notification API code!
+ */
+
+// Determine the correct object to use
+var notification =
+  window.Notification || window.mozNotification || window.webkitNotification;
+
+// The user needs to allow this
+if ("undefined" === typeof notification)
+  alert("Web notification not supported");
+else notification.requestPermission(function(permission) {});
+
+// A function handler
+function Notify(titleText, bodyText) {
+  if ("undefined" === typeof notification) return false; //Not supported....
+  var noty = new notification(titleText, {
+    body: bodyText
+  });
+  noty.onclick = function() {
+    console.log("notification.Click");
+  };
+  noty.onerror = function() {
+    console.log("notification.Error");
+  };
+  noty.onshow = function() {
+    console.log("notification.Show");
+  };
+  noty.onclose = function() {
+    console.log("notification.Close");
+  };
+  return true;
 }
