@@ -11,12 +11,17 @@ var workTimerPaused = true;
 var breakTimerPaused = true;
 
 //sound effects
-var breakSound = "breakSound";
-createjs.Sound.registerSound("lalala.mp3", breakSound);
-var workSound = "workSound";
-createjs.Sound.registerSound("shouganai.mp3", workSound);
+var breakSound = new Audio("lalala.mp3");
+var workSound = new Audio("shouganai.mp3");
 
 var x = setInterval(countdown, 1000);
+
+function initSounds() {
+  breakSound.play();
+  breakSound.pause();
+  workSound.play();
+  workSound.pause();
+}
 
 function countdown() {
   if (!workTimerPaused || !breakTimerPaused) {
@@ -46,6 +51,7 @@ function displayTime(minutes, seconds) {
 //timerPaused = false;
 
 toggleWorkTimerButton.addEventListener("click", function() {
+  initSounds();
   if (workTimerPaused) {
     stopBreakTimer();
     startWorkTimer();
@@ -55,6 +61,7 @@ toggleWorkTimerButton.addEventListener("click", function() {
 });
 
 toggleBreakTimerButton.addEventListener("click", function() {
+  initSounds();
   if (breakTimerPaused) {
     stopWorkTimer();
     startBreakTimer();
@@ -64,6 +71,7 @@ toggleBreakTimerButton.addEventListener("click", function() {
 });
 
 resetButton.addEventListener("click", function() {
+  initSounds();
   toggleWorkTimerButton.classList.remove("bigger");
   toggleBreakTimerButton.classList.remove("bigger");
   stopWorkTimer();
@@ -120,13 +128,13 @@ function timerFinished() {
     toggleBreakTimerButton.classList.add("bigger");
     message.textContent = "Take a break!";
     Notify("SuperPomo", "Time for a break!");
-    createjs.Sound.play(breakSound);
+    breakSound.play();
   } else if (!breakTimerPaused) {
     breakTimerPaused = true;
     toggleWorkTimerButton.classList.add("bigger");
     message.textContent = "Back to work!";
     Notify("SuperPomo", "Time to get back to work!");
-    createjs.Sound.play(workSound);
+    workSound.play();
   }
 }
 
