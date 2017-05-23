@@ -44,12 +44,8 @@ function displayTime(minutes, seconds) {
 //timerPaused = false;
 
 function initSounds() {
-  breakSound.volume = 0.0;
   breakSound.play();
-  breakSound.volume = 1.0;
-  workSound.volume = 0.0;
   workSound.play();
-  workSound.volume = 1.0;
 }
 
 toggleWorkTimerButton.addEventListener("click", function() {
