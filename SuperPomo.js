@@ -11,8 +11,8 @@ var workTimerPaused = true;
 var breakTimerPaused = true;
 
 //sound effects
-var breakSound = new Audio("lalala.mp3");
-var workSound = new Audio("shouganai.mp3");
+var breakSound = new Audio("audio/lalala.mp3");
+var workSound = new Audio("audio/shouganai.mp3");
 
 var x = setInterval(countdown, 1000);
 
@@ -170,4 +170,102 @@ function Notify(titleText, bodyText) {
     console.log("notification.Close");
   };
   return true;
+}
+
+/**
+ * Web Audio API Code
+ */
+
+function BufferLoader(context, urlList, callback) {
+  this.context = context;
+  this.urlList = urlList;
+  this.onload = callback;
+  this.bufferList = new Array();
+  this.loadCount = 0;
+}
+
+BufferLoader.prototype.loadBuffer = function(url, index) {
+  // Load buffer asynchronously
+  var request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.responseType = "arraybuffer";
+
+  var loader = this;
+
+  request.onload = function() {
+    // Asynchronously decode the audio file data in request.response
+    loader.context.decodeAudioData(
+      request.response,
+      function(buffer) {
+        if (!buffer) {
+          alert("error decoding file data: " + url);
+          return;
+        }
+        loader.bufferList[index] = buffer;
+        if (++loader.loadCount == loader.urlList.length)
+          loader.onload(loader.bufferList);
+      },
+      function(error) {
+        console.error("decodeAudioData error", error);
+      }
+    );
+  };
+
+  request.onerror = function() {
+    alert("BufferLoader: XHR error");
+  };
+
+  request.send();
+};
+
+BufferLoader.prototype.load = function() {
+  for (var i = 0; i < this.urlList.length; ++i)
+    this.loadBuffer(this.urlList[i], i);
+};
+
+var context;
+var bufferLoader;
+var source1;
+var source2;
+
+// Fix up prefixing
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+context = new AudioContext();
+
+bufferLoader = new BufferLoader(
+  context,
+  ["audio/shouganai.mp3", "audio/lalala.mp3"],
+  finishedLoading
+);
+
+bufferLoader.load();
+
+function finishedLoading(bufferList) {
+  // Create two sources and play them both together.
+  source1 = context.createBufferSource();
+  source2 = context.createBufferSource();
+  source1.buffer = bufferList[0];
+  source2.buffer = bufferList[1];
+
+  // source1.connect(context.destination);
+  // source2.connect(context.destination);
+  // source1.start(0);
+  // source2.start(0);
+  playSound(source1);
+}
+
+//We will call this function from the index file
+//it might look messy/crazy, but every time you want to play/replay a sound in Web Audio, you need to re-create the contect and connection.
+function playSound(sound, volume, loop) {
+  //set some default values for the functions volume and loop parameters
+  volume = typeof volume !== "undefined" ? volume : 1;
+  loop = typeof loop !== "undefined" ? loop : false;
+
+  var source = context.createBufferSource(), g = context.createGain();
+  source.buffer = sound.buffer;
+  source.loop = loop;
+  g.gain.value = volume;
+  source.connect(g);
+  g.connect(context.destination);
+  source.start(0);
 }
