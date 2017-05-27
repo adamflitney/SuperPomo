@@ -16,13 +16,6 @@ var workSound = new Audio("audio/shouganai.mp3");
 
 var x = setInterval(countdown, 1000);
 
-function initSounds() {
-  breakSound.play();
-  breakSound.pause();
-  workSound.play();
-  workSound.pause();
-}
-
 function countdown() {
   if (!workTimerPaused || !breakTimerPaused) {
     //alert("timer not paused");
@@ -71,7 +64,6 @@ toggleBreakTimerButton.addEventListener("click", function() {
 });
 
 resetButton.addEventListener("click", function() {
-  initSounds();
   toggleWorkTimerButton.classList.remove("bigger");
   toggleBreakTimerButton.classList.remove("bigger");
   stopWorkTimer();
@@ -128,13 +120,13 @@ function timerFinished() {
     toggleBreakTimerButton.classList.add("bigger");
     message.textContent = "Take a break!";
     Notify("SuperPomo", "Time for a break!");
-    breakSound.play();
+    playSound(source2);
   } else if (!breakTimerPaused) {
     breakTimerPaused = true;
     toggleWorkTimerButton.classList.add("bigger");
     message.textContent = "Back to work!";
     Notify("SuperPomo", "Time to get back to work!");
-    workSound.play();
+    playSound(source1);
   }
 }
 
@@ -251,7 +243,6 @@ function finishedLoading(bufferList) {
   // source2.connect(context.destination);
   // source1.start(0);
   // source2.start(0);
-  playSound(source1);
 }
 
 //We will call this function from the index file
