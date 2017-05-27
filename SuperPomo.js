@@ -44,7 +44,6 @@ function displayTime(minutes, seconds) {
 //timerPaused = false;
 
 toggleWorkTimerButton.addEventListener("click", function() {
-  initSounds();
   if (workTimerPaused) {
     stopBreakTimer();
     startWorkTimer();
@@ -54,7 +53,6 @@ toggleWorkTimerButton.addEventListener("click", function() {
 });
 
 toggleBreakTimerButton.addEventListener("click", function() {
-  initSounds();
   if (breakTimerPaused) {
     stopWorkTimer();
     startBreakTimer();
