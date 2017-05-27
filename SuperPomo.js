@@ -70,6 +70,7 @@ resetButton.addEventListener("click", function() {
   seconds = 0;
   displayTime(minutes, seconds);
   message.textContent = "Let's do some work!";
+  playSound(source1);
 });
 
 function stopWorkTimer() {
